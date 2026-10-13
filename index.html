@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- EDIT: clinic name -->
+  <title>In Focus Eye Center</title>
+  <meta name="description" content="In Focus Eye Center in Inman Park, Atlanta: eye exams, contact lens fittings, eyeglasses, and medical eye care since 2009.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314304A'/%3E%3Cpath d='M4 16c4-6 8-8 12-8s8 2 12 8c-4 6-8 8-12 8s-8-2-12-8z' fill='%23F3F7FA'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%232E7DBA'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F3F7FA;
+      --card: #FFFFFF;
+      --navy: #14304A;
+      --text: #22364A;
+      --muted: #5B6E80;
+      --blue: #2E7DBA;
+      --line: #D6E2EB;
+      --sun: #F2C14E;
+      --font: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 1.0625rem; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { color: var(--blue); }
+    a:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 6px; }
+    h1, h2, h3 { color: var(--navy); line-height: 1.15; margin: 0; }
+    p { margin: 0 0 1em; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    /* Top bar */
+    .topbar { background: var(--navy); color: #DCE8F2; font-size: 0.92rem; }
+    .topbar .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
+    .topbar a { color: #FFFFFF; font-weight: 600; text-decoration: none; }
+
+    header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 20px; padding-bottom: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; color: var(--navy); text-decoration: none; }
+    .brand svg { width: 34px; height: 34px; }
+    nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; flex-wrap: wrap; align-items: center; }
+    nav a { color: var(--text); text-decoration: none; font-weight: 600; }
+    nav a:hover { color: var(--blue); }
+
+    .btn { display: inline-block; font-weight: 600; text-decoration: none; padding: 13px 22px; border-radius: 10px; font-size: 1rem; }
+    .btn.solid { background: var(--blue); color: #FFFFFF; }
+    .btn.solid:hover { background: #246AA0; }
+    .btn.outline { border: 2px solid var(--navy); color: var(--navy); }
+    nav .btn { padding: 9px 16px; color: #FFFFFF; }
+
+    /* Hero with eye chart */
+    .hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; padding-top: 40px; padding-bottom: 80px; }
+    .hero h1 { font-size: clamp(2.3rem, 5vw, 3.7rem); font-weight: 800; max-width: 16ch; }
+    .hero .lede { font-size: 1.2rem; color: var(--muted); max-width: 44ch; margin-top: 20px; }
+    .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .hero .note { margin-top: 20px; font-size: 0.95rem; color: var(--muted); }
+
+    .chart { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px 24px 22px; box-shadow: 0 18px 40px -28px rgba(20, 48, 74, 0.45); }
+    .chart .row { display: grid; grid-template-columns: 52px 1fr; align-items: center; }
+    .chart .acuity { font-size: 0.72rem; color: var(--muted); }
+    .chart .letters { text-align: center; font-weight: 800; color: var(--navy); letter-spacing: 0.32em; padding-left: 0.32em; line-height: 1.25; }
+    .chart .row.target { border-top: 3px solid #D9534F; margin-top: 6px; padding-top: 6px; }
+    .chart .row.target .letters { color: var(--blue); letter-spacing: 0.18em; }
+    .chart .row:nth-child(1) .letters { font-size: 5rem; }
+    .chart .row:nth-child(2) .letters { font-size: 3.3rem; }
+    .chart .row:nth-child(3) .letters { font-size: 2.4rem; }
+    .chart .row:nth-child(4) .letters { font-size: 1.75rem; }
+    .chart .row:nth-child(5) .letters { font-size: 1.3rem; }
+    .chart .row:nth-child(6) .letters { font-size: 1rem; }
+
+    /* Sections */
+    section { padding-top: 80px; padding-bottom: 80px; }
+    section.alt { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    section h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 800; }
+    section .intro { color: var(--muted); max-width: 60ch; margin-top: 12px; }
+
+    .services { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 40px; }
+    .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
+    .plans h3 { font-size: 1.1rem; }
+    footer .social { display: flex; gap: 18px; }
+    .service h3 { font-size: 1.2rem; margin-bottom: 6px; display: flex; gap: 10px; align-items: center; }
+    .service h3::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px #D3E6F5; flex: none; }
+    .service p { color: var(--muted); margin: 0; }
+
+    .insurance { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; padding: 0; list-style: none; }
+    .insurance li { background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; font-weight: 600; }
+
+    .team { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 28px; }
+    .person img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; background: var(--line); }
+    .person h3 { font-size: 1.15rem; margin-top: 14px; }
+    .person .role { color: var(--blue); font-weight: 600; font-size: 0.95rem; margin: 2px 0 8px; }
+    .person p { color: var(--muted); font-size: 0.95rem; margin: 0; }
+
+    .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; align-items: start; }
+    table.hours { width: 100%; border-collapse: collapse; }
+    table.hours th, table.hours td { text-align: left; padding: 11px 0; border-bottom: 1px solid var(--line); }
+    table.hours th { font-weight: 600; color: var(--navy); }
+    table.hours td { color: var(--muted); text-align: right; }
+    .place { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+    .place h3 { font-size: 1.2rem; margin-bottom: 10px; }
+    .place address { font-style: normal; margin-bottom: 18px; }
+
+    .book { background: var(--navy); color: #DCE8F2; border-radius: 22px; padding: 56px 48px; display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 32px; align-items: center; }
+    .book h2 { color: #FFFFFF; }
+    .book p { margin-top: 12px; max-width: 50ch; }
+    .book .actions { display: flex; flex-direction: column; gap: 12px; }
+    .book .btn.solid { background: var(--sun); color: var(--navy); text-align: center; }
+    .book .btn.outline { border-color: #FFFFFF; color: #FFFFFF; text-align: center; }
+
+    footer { padding-top: 32px; padding-bottom: 40px; color: var(--muted); font-size: 0.9rem; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+    @media (max-width: 900px) {
+      .hero .wrap, .visit, .book, .plans { grid-template-columns: 1fr; }
+      .services { grid-template-columns: 1fr 1fr; }
+      .team { grid-template-columns: 1fr 1fr; }
+      .book { padding: 40px 28px; }
+      section { padding-top: 60px; padding-bottom: 60px; }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding-left: 16px; padding-right: 16px; }
+      .services { grid-template-columns: 1fr; }
+      .team { gap: 20px; }
+      nav ul { gap: 16px; }
+      .chart .row:nth-child(1) .letters { font-size: 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- EDIT: short note and phone number -->
+  <div class="topbar">
+    <div class="wrap">
+      <span>Serving Inman Park and Atlanta since 2009.</span>
+      <span><a href="https://www.zocdoc.com/practice/in-focus-eye-center-7246">Book online</a> or call <a href="tel:+14045890822">(404) 589-0822</a></span>
+    </div>
+  </div>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="#">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#14304A"/><path d="M4 16c4-6 8-8 12-8s8 2 12 8c-4 6-8 8-12 8s-8-2-12-8z" fill="#F3F7FA"/><circle cx="16" cy="16" r="4.5" fill="#2E7DBA"/></svg>
+        In Focus Eye Center
+      </a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#team">Our team</a></li>
+          <li><a href="#visit">Hours &amp; location</a></li>
+          <li><a class="btn solid" href="https://www.zocdoc.com/practice/in-focus-eye-center-7246">Book an exam</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <div>
+          <h1>Your neighborhood eye doctor in Inman Park.</h1>
+          <p class="lede">Thorough eye exams, contact lens fittings, more than 500 frames to try on, and care for eye conditions, all from a close-knit team that takes time to explain what they see.</p>
+          <div class="actions">
+            <a class="btn solid" href="https://www.zocdoc.com/practice/in-focus-eye-center-7246">Book an exam</a>
+            <a class="btn outline" href="tel:+14045890822">Call (404) 589-0822</a>
+          </div>
+          <p class="note">In network with VSP, EyeMed, and most major medical plans. <a href="http://www.yelp.com/biz/in-focus-eye-center-atlanta">Read our reviews on Yelp</a></p>
+        </div>
+
+        <div class="chart" role="img" aria-label="Eye chart whose bottom line reads See you soon">
+          <div class="row"><span class="acuity">20/200</span><span class="letters">E</span></div>
+          <div class="row"><span class="acuity">20/100</span><span class="letters">FP</span></div>
+          <div class="row"><span class="acuity">20/70</span><span class="letters">TOZ</span></div>
+          <div class="row"><span class="acuity">20/50</span><span class="letters">LPED</span></div>
+          <div class="row"><span class="acuity">20/40</span><span class="letters">PECFD</span></div>
+          <div class="row target"><span class="acuity">20/20</span><span class="letters">SEE YOU SOON</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT: services -->
+    <section class="alt" id="services">
+      <div class="wrap">
+        <h2>Services</h2>
+        <p class="intro">Everything from your yearly checkup to managing a long-term eye condition.</p>
+        <div class="services">
+          <div class="service"><h3>Comprehensive eye exams</h3><p>A full check of your vision and eye health. Yearly exams can catch diabetes-related changes, vascular problems, and other issues early.</p></div>
+          <div class="service"><h3>Contact lens fittings</h3><p>Exams and fittings for glasses and contacts to correct nearsightedness, farsightedness, astigmatism, and presbyopia.</p></div>
+          <div class="service"><h3>Optical shop</h3><p>More than 500 frames picked for style, quality, and value, each with a two-year warranty against breakage.</p></div>
+          <div class="service"><h3>Retinal imaging without dilation</h3><p>Wide-field Clarus 500 imaging gives a detailed view of the back of your eye, usually without dilating drops.</p></div>
+          <div class="service"><h3>Eye disease care</h3><p>Diagnosis and management of cataracts, macular degeneration, diabetic retinopathy, amblyopia, and more.</p></div>
+          <div class="service"><h3>Insurance help</h3><p>Our team explains your benefits and helps you get the most out of your vision and medical coverage.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDIT: insurance plans -->
+    <section id="insurance">
+      <div class="wrap">
+        <h2>Insurance we accept</h2>
+        <p class="intro">Don't see your plan? Call us and we'll check your coverage before your visit.</p>
+        <div class="plans">
+          <div>
+            <h3>Vision plans</h3>
+            <ul class="insurance">
+              <li>Aetna</li><li>Aetna Student Health</li><li>Cigna</li><li>EyeMed</li><li>MetLife Vision</li><li>VSP</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Medical plans (for eye health concerns)</h3>
+            <ul class="insurance">
+              <li>Aetna</li><li>Assurant</li><li>Blue Cross Blue Shield</li><li>Cigna</li><li>Coventry</li><li>GEHA</li><li>Guardian</li><li>Humana</li><li>Oxford</li><li>PHCS</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDIT: staff. Placeholder photos for now. To add a real photo, upload it (e.g. mario.jpg) next to this file and change that person's src="..." to src="mario.jpg" -->
+    <section class="alt" id="team">
+      <div class="wrap">
+        <h2>Meet our team</h2>
+        <p class="intro">The people you'll see when you visit.</p>
+        <div class="team">
+          <div class="person">
+            <img alt="Photo of Dr. Mario Martinez, O.D." src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23CFE2F1'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%237FA9CC'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%237FA9CC'/%3E%3C/svg%3E">
+            <h3>Dr. Mario Martinez, O.D.</h3>
+            <p class="role">Optometrist and owner</p>
+            <p>Grew up in a military family in Texas and played tennis at East Carolina University. A 2021 graduate of Southern College of Optometry with experience in contact lenses, surgical co-management, and eye disease.</p>
+          </div>
+          <div class="person">
+            <img alt="Photo of Dr. Lindsey Eisenberg, O.D." src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23DCEBDF'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%2390B79A'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%2390B79A'/%3E%3C/svg%3E">
+            <h3>Dr. Lindsey Eisenberg, O.D.</h3>
+            <p class="role">Optometrist</p>
+            <p>Atlanta native from Dunwoody and UGA graduate. Earned her O.D. from Pennsylvania College of Optometry at Salus University, with advanced training in contact lenses.</p>
+          </div>
+          <div class="person">
+            <img alt="Photo of Steven Kintop" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23F6E7C1'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%23D9B65E'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%23D9B65E'/%3E%3C/svg%3E">
+            <h3>Steven Kintop</h3>
+            <p class="role">Office manager and ABO-certified optician</p>
+            <p>Co-founded In Focus in 2009 and has been ABO certified since 2010. The office expert on lenses and lens design.</p>
+          </div>
+          <div class="person">
+            <img alt="Photo of Emily Herman" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23E6DDF0'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%23A592C2'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%23A592C2'/%3E%3C/svg%3E">
+            <h3>Emily Herman</h3>
+            <p class="role">Optometric technician</p>
+            <p>A Georgia Southern graduate who helps with patient testing and procedures. Also in charge of the office playlist.</p>
+          </div>
+          <div class="person">
+            <img alt="Photo of Marcia" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23F3DCD6'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%23CF8E7E'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%23CF8E7E'/%3E%3C/svg%3E">
+            <h3>Marcia</h3>
+            <p class="role">Optician</p>
+            <p>Helps patients pick frames and makes sense of lens options and insurance benefits.</p>
+          </div>
+          <div class="person">
+            <img alt="Photo of Mikayla Mayfield" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23D8EEF0'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%237DBFC6'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%237DBFC6'/%3E%3C/svg%3E">
+            <h3>Mikayla Mayfield</h3>
+            <p class="role">Optician</p>
+            <p>Helps patients find glasses that fit their style while studying psychology.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDIT: hours and address -->
+    <section id="visit">
+      <div class="wrap">
+        <h2>Hours and location</h2>
+        <div class="visit">
+          <table class="hours">
+            <tbody>
+              <tr><th scope="row">Monday</th><td>9:00 am – 5:00 pm</td></tr>
+              <tr><th scope="row">Tuesday</th><td>9:00 am – 5:00 pm</td></tr>
+              <tr><th scope="row">Wednesday</th><td>8:00 am – 5:00 pm</td></tr>
+              <tr><th scope="row">Thursday</th><td>9:00 am – 5:00 pm</td></tr>
+              <tr><th scope="row">Friday</th><td>9:00 am – 2:00 pm</td></tr>
+              <tr><th scope="row">Saturday</th><td>Closed</td></tr>
+              <tr><th scope="row">Sunday</th><td>Closed</td></tr>
+            </tbody>
+          </table>
+          <div class="place">
+            <h3>Find us in Inman Village</h3>
+            <address>
+              870 Inman Village Parkway NE, Suite 3<br>
+              Atlanta, GA 30307
+            </address>
+            <p>Phone <a href="tel:+14045890822">(404) 589-0822</a><br>Fax (404) 589-4766</p>
+            <a class="btn outline" href="https://www.google.com/maps/search/?api=1&query=870+Inman+Village+Parkway+NE+Suite+3+Atlanta+GA+30307">Get directions</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDIT: booking links -->
+    <div class="wrap" id="book">
+      <div class="book">
+        <div>
+          <h2>Ready to book your exam?</h2>
+          <p>Pick a time online any hour of the day, or call us during office hours and we'll find a slot that works.</p>
+        </div>
+        <div class="actions">
+          <a class="btn solid" href="https://www.zocdoc.com/practice/in-focus-eye-center-7246">Book online</a>
+          <a class="btn outline" href="tel:+14045890822">Call (404) 589-0822</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; <span id="year">2026</span> In Focus Eye Center</span>
+      <span class="social"><a href="https://www.facebook.com/InFocusEyeCenter/">Facebook</a><a href="http://www.yelp.com/biz/in-focus-eye-center-atlanta">Yelp</a><a href="#">Back to top</a></span>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
