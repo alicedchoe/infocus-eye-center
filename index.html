@@ -6,70 +6,86 @@
   <!-- EDIT: clinic name -->
   <title>In Focus Eye Center</title>
   <meta name="description" content="In Focus Eye Center in Inman Park, Atlanta: eye exams, contact lens fittings, eyeglasses, and medical eye care since 2009.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314304A'/%3E%3Cpath d='M4 16c4-6 8-8 12-8s8 2 12 8c-4 6-8 8-12 8s-8-2-12-8z' fill='%23F3F7FA'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%232E7DBA'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Numbers only: Atkinson Hyperlegible draws 0 with a slash, so the digits 0-9 are taken from Inter instead -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&text=0123456789&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #F3F7FA;
       --card: #FFFFFF;
-      --navy: #14304A;
+      --navy: #002D56;   /* logo navy */
       --text: #22364A;
       --muted: #5B6E80;
-      --blue: #2E7DBA;
+      --blue: #009EFF;   /* logo blue: buttons, icons, accents */
+      --blue-ink: #0070C0; /* darker logo blue for links and blue text, so it stays readable */
       --line: #D6E2EB;
-      --sun: #F2C14E;
-      --font: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
+      --font: "Inter", "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif; /* Inter is loaded for the digits 0-9 only */
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 1.0625rem; line-height: 1.6; }
     img { max-width: 100%; display: block; }
-    a { color: var(--blue); }
-    a:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 6px; }
+    a { color: var(--blue-ink); }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     h1, h2, h3 { color: var(--navy); line-height: 1.15; margin: 0; }
     p { margin: 0 0 1em; }
     .wrap { max-width: 1120px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
     /* Top bar */
-    .topbar { background: var(--navy); color: #DCE8F2; font-size: 0.92rem; }
-    .topbar .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
-    .topbar a { color: #FFFFFF; font-weight: 600; text-decoration: none; }
+    .topbar { background: var(--navy); color: #FFFFFF; font-size: 1.03rem; position: relative; z-index: 20; }
+    .topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 14px 20px; flex-wrap: wrap; padding-top: 16px; padding-bottom: 16px; position: relative; }
+    .topbar .contact { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 0; }
+    .topbar .item { display: inline-flex; align-items: center; gap: 9px; color: #FFFFFF; font-weight: 600; text-decoration: none; padding: 2px 16px; border-left: 2px solid rgba(0, 158, 255, 0.65); }
+    .topbar .contact > :first-child, .topbar .contact > :first-child > .item { border-left: 0; padding-left: 0; }
+    .topbar a.item:hover { text-decoration: underline; }
+    .topbar .item svg { width: 20px; height: 20px; flex: none; color: var(--blue); }
+    .topbar .book-btn { background: var(--blue); color: var(--navy); font-weight: 800; font-size: 1.06rem; padding: 14px 26px; border-radius: 999px; text-decoration: none; white-space: nowrap; box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.6); }
+    .topbar .book-btn:hover { background: #4DBBFF; }
 
-    header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 20px; padding-bottom: 20px; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; color: var(--navy); text-decoration: none; }
-    .brand svg { width: 34px; height: 34px; }
-    nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; flex-wrap: wrap; align-items: center; }
-    nav a { color: var(--text); text-decoration: none; font-weight: 600; }
-    nav a:hover { color: var(--blue); }
+    /* Holiday hours dropdown */
+    .holiday { position: relative; }
+    .holiday summary { cursor: pointer; list-style: none; }
+    .holiday summary::-webkit-details-marker { display: none; }
+    .holiday summary .caret { width: 14px; height: 14px; transition: transform 0.15s; color: #FFFFFF; }
+    .holiday[open] summary .caret { transform: rotate(180deg); }
+    .holiday .panel { position: absolute; left: 16px; top: calc(100% + 14px); width: 310px; background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; font-size: 0.98rem; font-weight: 400; box-shadow: 0 22px 44px -20px rgba(0, 45, 86, 0.55); }
+    .holiday .panel h3 { font-size: 1.02rem; margin-bottom: 8px; }
+    .holiday .panel table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+    .holiday .panel th, .holiday .panel td { text-align: left; padding: 7px 0; border-bottom: 1px solid var(--line); font-weight: 600; color: var(--navy); }
+    .holiday .panel td { text-align: right; color: #B4443F; }
+    .holiday .panel p { margin: 0; color: var(--muted); font-size: 0.93rem; }
+    .holiday .panel p + p { margin-top: 6px; }
+    @media (prefers-reduced-motion: reduce) { .holiday summary .caret { transition: none; } }
+
+    header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 16px; padding-bottom: 16px; }
+    header.site { background: #FFFFFF; border-bottom: 1px solid var(--line); }
+    .brand { display: block; line-height: 0; }
+    .brand img { height: 62px; width: auto; }
+    nav ul { list-style: none; display: flex; gap: 26px; margin: 0; padding: 0; flex-wrap: wrap; align-items: center; }
+    nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 1.08rem; }
+    nav a:hover { color: var(--blue-ink); }
 
     .btn { display: inline-block; font-weight: 600; text-decoration: none; padding: 13px 22px; border-radius: 10px; font-size: 1rem; }
-    .btn.solid { background: var(--blue); color: #FFFFFF; }
-    .btn.solid:hover { background: #246AA0; }
+    .btn.solid { background: var(--blue); color: var(--navy); font-weight: 700; }
+    .btn.solid:hover { background: #4DBBFF; }
     .btn.outline { border: 2px solid var(--navy); color: var(--navy); }
-    nav .btn { padding: 9px 16px; color: #FFFFFF; }
 
-    /* Hero with eye chart */
-    .hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; padding-top: 40px; padding-bottom: 80px; }
-    .hero h1 { font-size: clamp(2.3rem, 5vw, 3.7rem); font-weight: 800; max-width: 16ch; }
+    /* Hero with storefront photo */
+    .hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; padding-top: 56px; padding-bottom: 80px; }
+    .hero h1 { font-size: clamp(2.2rem, 4.8vw, 3.5rem); font-weight: 800; max-width: 17ch; }
+    .hero h1 span { display: block; color: var(--blue-ink); font-size: 0.72em; margin-top: 0.3em; }
     .hero .lede { font-size: 1.2rem; color: var(--muted); max-width: 44ch; margin-top: 20px; }
     .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
     .hero .note { margin-top: 20px; font-size: 0.95rem; color: var(--muted); }
 
-    .chart { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px 24px 22px; box-shadow: 0 18px 40px -28px rgba(20, 48, 74, 0.45); }
-    .chart .row { display: grid; grid-template-columns: 52px 1fr; align-items: center; }
-    .chart .acuity { font-size: 0.72rem; color: var(--muted); }
-    .chart .letters { text-align: center; font-weight: 800; color: var(--navy); letter-spacing: 0.32em; padding-left: 0.32em; line-height: 1.25; }
-    .chart .row.target { border-top: 3px solid #D9534F; margin-top: 6px; padding-top: 6px; }
-    .chart .row.target .letters { color: var(--blue); letter-spacing: 0.18em; }
-    .chart .row:nth-child(1) .letters { font-size: 5rem; }
-    .chart .row:nth-child(2) .letters { font-size: 3.3rem; }
-    .chart .row:nth-child(3) .letters { font-size: 2.4rem; }
-    .chart .row:nth-child(4) .letters { font-size: 1.75rem; }
-    .chart .row:nth-child(5) .letters { font-size: 1.3rem; }
-    .chart .row:nth-child(6) .letters { font-size: 1rem; }
+    .hero-photo { margin: 0; position: relative; padding-left: 64px; padding-bottom: 56px; }
+    .hero-photo img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: 88% 50%; border-radius: 18px; border: 1px solid var(--line); box-shadow: 0 18px 40px -28px rgba(0, 45, 86, 0.45); background: var(--line); }
+    .hero-photo img.inset { position: absolute; left: 0; bottom: 0; width: 42%; aspect-ratio: 3 / 4; object-position: 100% 30%; border: 6px solid var(--bg); border-radius: 16px; box-shadow: 0 16px 32px -18px rgba(0, 45, 86, 0.55); }
 
     /* Sections */
     section { padding-top: 80px; padding-bottom: 80px; }
@@ -77,80 +93,184 @@
     section h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 800; }
     section .intro { color: var(--muted); max-width: 60ch; margin-top: 12px; }
 
+    /* About: shop local */
+    .about { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; align-items: center; }
+    .about h2 span { display: block; }
+    .about h2 span:last-child { color: var(--blue-ink); }
+    .about p { color: var(--muted); margin-top: 18px; max-width: 46ch; }
+    .about .btn { margin-top: 8px; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 250px 200px; gap: 14px; }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; background: var(--line); }
+    .gallery .wide { grid-column: 1 / span 2; }
+
     .services { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 40px; }
     .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
     .plans h3 { font-size: 1.1rem; }
     footer .social { display: flex; gap: 18px; }
     .service h3 { font-size: 1.2rem; margin-bottom: 6px; display: flex; gap: 10px; align-items: center; }
-    .service h3::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px #D3E6F5; flex: none; }
+    .service h3::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px #CCEBFF; flex: none; }
     .service p { color: var(--muted); margin: 0; }
 
     .insurance { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; padding: 0; list-style: none; }
     .insurance li { background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; font-weight: 600; }
 
-    .team { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 28px; }
-    .person img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; background: var(--line); }
-    .person h3 { font-size: 1.15rem; margin-top: 14px; }
-    .person .role { color: var(--blue); font-weight: 600; font-size: 0.95rem; margin: 2px 0 8px; }
-    .person p { color: var(--muted); font-size: 0.95rem; margin: 0; }
+    .team { margin-top: 40px; display: grid; gap: 40px; }
+    .person { display: grid; grid-template-columns: 320px 1fr; gap: 36px; align-items: start; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+    .person:last-child { border-bottom: 0; padding-bottom: 0; }
+    .person img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px; background: var(--line); }
+    .person h3 { font-size: 1.3rem; }
+    .person .role { color: var(--blue-ink); font-weight: 600; margin: 4px 0 2px; }
+    .person .email { margin: 0 0 12px; font-size: 0.95rem; }
+    .person p { color: var(--muted); max-width: 68ch; }
+    .person p:last-child { margin-bottom: 0; }
+
+    .reviews { margin-top: 36px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .review { margin: 0; background: var(--bg); border: 1px solid var(--line); border-left: 5px solid var(--blue); border-radius: 14px; padding: 26px 28px; display: flex; flex-direction: column; }
+    .review blockquote { margin: 0 0 16px; }
+    .review blockquote .lead { font-size: 1.2rem; font-weight: 600; color: var(--navy); line-height: 1.4; margin-bottom: 10px; }
+    .review blockquote p { color: var(--muted); margin-bottom: 0; }
+    .review figcaption { font-weight: 600; margin-top: auto; }
+    .review figcaption span { color: var(--muted); font-weight: 400; }
+    .more-reviews { margin-top: 24px; color: var(--muted); }
+
+    .badge { display: inline-block; background: var(--blue); color: var(--navy); font-weight: 800; font-size: 0.78rem; padding: 2px 9px; border-radius: 999px; margin-right: 8px; vertical-align: 1px; }
+    .newsched { display: inline-flex; align-items: center; gap: 8px; background: var(--navy); color: #FFFFFF; border-radius: 999px; padding: 11px 22px 11px 11px; font-weight: 700; font-size: 1.12rem; line-height: 1.3; margin-bottom: 24px; text-decoration: none; box-shadow: 0 14px 28px -16px rgba(0, 45, 86, 0.7); }
+    .newsched:hover { background: #0A3F70; }
+    .newsched .badge { font-size: 0.9rem; padding: 4px 12px; margin-right: 2px; vertical-align: 0; }
+    .newsched .arrow { color: var(--blue); font-weight: 800; }
+
+    /* Patient forms */
+    .forms { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .form-card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; align-items: flex-start; }
+    .form-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .form-card p { color: var(--muted); }
+    .form-card .btn { margin-top: auto; }
+    .form-card .btn small { font-weight: 400; opacity: 0.85; }
 
     .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; align-items: start; }
     table.hours { width: 100%; border-collapse: collapse; }
     table.hours th, table.hours td { text-align: left; padding: 11px 0; border-bottom: 1px solid var(--line); }
     table.hours th { font-weight: 600; color: var(--navy); }
     table.hours td { color: var(--muted); text-align: right; }
-    .place { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+    .place { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
     .place h3 { font-size: 1.2rem; margin-bottom: 10px; }
     .place address { font-style: normal; margin-bottom: 18px; }
 
+    #book { padding-top: 80px; }
     .book { background: var(--navy); color: #DCE8F2; border-radius: 22px; padding: 56px 48px; display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 32px; align-items: center; }
-    .book h2 { color: #FFFFFF; }
+    .book h2 { color: #FFFFFF; font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 800; }
     .book p { margin-top: 12px; max-width: 50ch; }
     .book .actions { display: flex; flex-direction: column; gap: 12px; }
-    .book .btn.solid { background: var(--sun); color: var(--navy); text-align: center; }
+    .book .btn.solid { text-align: center; }
     .book .btn.outline { border-color: #FFFFFF; color: #FFFFFF; text-align: center; }
 
-    footer { padding-top: 32px; padding-bottom: 40px; color: var(--muted); font-size: 0.9rem; }
-    footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    /* Privacy notice (collapsed by default) */
+    .privacy { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 24px; }
+    .privacy summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+    .privacy .body { color: var(--muted); font-size: 0.95rem; max-width: 80ch; padding-top: 16px; }
+    .privacy h3 { font-size: 1.05rem; margin: 22px 0 8px; }
+    .privacy ul { margin: 0 0 1em; padding-left: 1.2em; }
+    .privacy li { margin-bottom: 4px; }
 
+    footer { padding-top: 32px; padding-bottom: 40px; color: var(--muted); font-size: 0.9rem; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 12px; flex-wrap: wrap; }
+    footer .foot-brand { display: flex; flex-direction: column; gap: 14px; }
+    footer .foot-brand img { width: 150px; height: auto; }
+
+    @media (max-width: 1150px) {
+      .topbar .wrap { justify-content: flex-start; }
+      .holiday .panel { left: auto; right: 0; }
+    }
     @media (max-width: 900px) {
-      .hero .wrap, .visit, .book, .plans { grid-template-columns: 1fr; }
+      .topbar .contact { gap: 10px 26px; }
+      .topbar .item, .topbar .contact > * > .item { border-left: 0; padding-left: 0; padding-right: 0; }
+      .holiday { width: 100%; }
+      .holiday .panel { position: static; width: auto; max-width: 380px; margin-top: 12px; }
+      .hero .wrap, .visit, .book, .plans, .about { grid-template-columns: 1fr; }
+      .hero-photo { padding-left: 48px; padding-bottom: 48px; max-width: 620px; }
+      .hero-photo img { aspect-ratio: 3 / 2; object-position: 70% 50%; }
+      .hero-photo img.inset { width: 34%; aspect-ratio: 3 / 4; object-position: 100% 30%; }
+      .about { gap: 36px; }
+      .about p { max-width: 60ch; }
       .services { grid-template-columns: 1fr 1fr; }
-      .team { grid-template-columns: 1fr 1fr; }
+      .person { grid-template-columns: 240px 1fr; gap: 24px; }
+      .reviews, .forms { grid-template-columns: 1fr; }
       .book { padding: 40px 28px; }
       section { padding-top: 60px; padding-bottom: 60px; }
+      #book { padding-top: 60px; }
     }
     @media (max-width: 560px) {
       .wrap { padding-left: 16px; padding-right: 16px; }
       .services { grid-template-columns: 1fr; }
-      .team { gap: 20px; }
-      nav ul { gap: 16px; }
-      .chart .row:nth-child(1) .letters { font-size: 4rem; }
+      .person { grid-template-columns: 1fr; }
+      .person img { max-width: 420px; }
+      .gallery { grid-template-rows: 180px 140px; }
+      .hero-photo { padding-left: 32px; padding-bottom: 40px; }
+      nav ul { gap: 14px 18px; }
+      nav a { font-size: 1rem; }
+      .brand img { height: 50px; }
+      .topbar { font-size: 1rem; }
+      .topbar .contact { flex-direction: column; align-items: flex-start; gap: 10px; width: 100%; }
+      .topbar .item, .topbar .contact > * > .item { border-left: 0; padding-left: 0; padding-right: 0; }
+      .holiday { width: 100%; }
+      .holiday .panel { max-width: none; }
+      .topbar .book-btn { width: 100%; text-align: center; }
+      .newsched { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- EDIT: short note and phone number -->
+  <!-- EDIT: address, phone number, holiday hours, and booking button -->
   <div class="topbar">
     <div class="wrap">
-      <span>Serving Inman Park and Atlanta since 2009.</span>
-      <span><a href="https://www.zocdoc.com/practice/in-focus-eye-center-7246">Book online</a> or call <a href="tel:+14045890822">(404) 589-0822</a></span>
+      <div class="contact">
+        <a class="item" href="https://www.google.com/maps/search/?api=1&query=870+Inman+Village+Parkway+NE+Suite+3+Atlanta+GA+30307">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+          870 Inman Village Pkwy NE, Suite 3, Atlanta, GA
+        </a>
+        <a class="item" href="tel:+14045890822">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.100.37 2.300.57 3.600.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.500a1 1 0 0 1 1 1c0 1.300.2 2.5.57 3.600a1 1 0 0 1-.25 1z"/></svg>
+          (404) 589-0822
+        </a>
+        <!-- EDIT: holiday hours. Change the rows and the note for each holiday. To hide the dropdown, delete from <details to </details>. -->
+        <details class="holiday" id="holiday">
+          <summary class="item">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1zm12 8H5v9h14z"/></svg>
+            Holiday hours
+            <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>
+          </summary>
+          <div class="panel">
+            <h3>Thanksgiving week</h3>
+            <table>
+              <tbody>
+                <tr><th scope="row">Thursday, Nov 26</th><td>Closed</td></tr>
+                <tr><th scope="row">Friday, Nov 27</th><td>Closed</td></tr>
+              </tbody>
+            </table>
+            <p>We return to normal business hours on Monday, November 30. Have a safe and happy holiday!</p>
+            <p><a href="https://schedulewidget.revintake.com/e345042009d22d5fe933d21d73f39ef0">Book online</a> anytime, even when we're closed.</p>
+          </div>
+        </details>
+      </div>
+      <a class="book-btn" href="https://schedulewidget.revintake.com/e345042009d22d5fe933d21d73f39ef0">Book an appointment</a>
     </div>
   </div>
 
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="#">
-        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#14304A"/><path d="M4 16c4-6 8-8 12-8s8 2 12 8c-4 6-8 8-12 8s-8-2-12-8z" fill="#F3F7FA"/><circle cx="16" cy="16" r="4.5" fill="#2E7DBA"/></svg>
-        In Focus Eye Center
+      <!-- EDIT: logo (images/logo-horizontal.png) -->
+      <a class="brand" href="#" aria-label="In Focus Eye Center, back to top">
+        <img src="images/logo-horizontal.png" alt="In Focus Eye Center" width="952" height="200">
       </a>
       <nav aria-label="Main">
         <ul>
+          <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#team">Our team</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#forms">Forms</a></li>
           <li><a href="#visit">Hours &amp; location</a></li>
-          <li><a class="btn solid" href="https://www.zocdoc.com/practice/in-focus-eye-center-7246">Book an exam</a></li>
         </ul>
       </nav>
     </div>
@@ -160,52 +280,67 @@
     <div class="hero">
       <div class="wrap">
         <div>
-          <h1>Your neighborhood eye doctor in Inman Park.</h1>
+          <a class="newsched" href="https://schedulewidget.revintake.com/e345042009d22d5fe933d21d73f39ef0"><span class="badge">New</span>Online scheduling is here. Book anytime. <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <h1>Your Neighborhood Eye Doctor in Inman Park. <span>Independently Owned.</span></h1>
           <p class="lede">Thorough eye exams, contact lens fittings, more than 500 frames to try on, and care for eye conditions, all from a close-knit team that takes time to explain what they see.</p>
           <div class="actions">
-            <a class="btn solid" href="https://www.zocdoc.com/practice/in-focus-eye-center-7246">Book an exam</a>
+            <a class="btn solid" href="https://schedulewidget.revintake.com/e345042009d22d5fe933d21d73f39ef0">Book online</a>
             <a class="btn outline" href="tel:+14045890822">Call (404) 589-0822</a>
           </div>
-          <p class="note">In network with VSP, EyeMed, and most major medical plans. <a href="http://www.yelp.com/biz/in-focus-eye-center-atlanta">Read our reviews on Yelp</a></p>
+          <p class="note">In network with VSP, EyeMed, and most major medical plans. <a href="#reviews">See what patients say</a></p>
         </div>
 
-        <div class="chart" role="img" aria-label="Eye chart whose bottom line reads See you soon">
-          <div class="row"><span class="acuity">20/200</span><span class="letters">E</span></div>
-          <div class="row"><span class="acuity">20/100</span><span class="letters">FP</span></div>
-          <div class="row"><span class="acuity">20/70</span><span class="letters">TOZ</span></div>
-          <div class="row"><span class="acuity">20/50</span><span class="letters">LPED</span></div>
-          <div class="row"><span class="acuity">20/40</span><span class="letters">PECFD</span></div>
-          <div class="row target"><span class="acuity">20/20</span><span class="letters">SEE YOU SOON</span></div>
-        </div>
+        <!-- EDIT: hero photos (images/storefront.jpg and images/storefront-sign.jpg) -->
+        <figure class="hero-photo">
+          <img src="images/storefront.jpg" alt="The In Focus Eye Center storefront in Inman Village" width="1024" height="682">
+          <img class="inset" src="images/storefront-sign.jpg" alt="The In Focus Eye Center sign outside the office" width="768" height="998">
+        </figure>
       </div>
     </div>
 
+    <!-- EDIT: about text and the three office photos (files are in the images folder) -->
+    <section class="alt" id="about">
+      <div class="wrap about">
+        <div>
+          <h2><span>Shop small.</span><span>Shop local.</span><span>Shop Inman Park.</span></h2>
+          <p>At In Focus Eye Center you will find a caring team of professionals dedicated to providing high quality, personalized eye care for the whole family. Inman Park has supported us loyally since we opened our doors in 2009, and we are proud of the relationships we have made along the way.</p>
+          <p>Our owner and optometrist, Dr. Mario Martinez, and his staff are dedicated to improving your quality of life and vision wellness through uncompromising service and state-of-the-art technology.</p>
+          <a class="btn outline" href="#team">Meet our team</a>
+        </div>
+        <div class="gallery">
+          <img class="wide" src="images/waiting-area.jpg" alt="The front desk and waiting area, with windows onto the street" width="1024" height="526" loading="lazy">
+          <img src="images/exam-room.jpg" alt="An exam room with the exam chair and equipment" width="1024" height="682" loading="lazy">
+          <img src="images/optical-styling.jpg" alt="A patient trying on frames with an optician" width="1024" height="682" loading="lazy">
+        </div>
+      </div>
+    </section>
+
     <!-- EDIT: services -->
-    <section class="alt" id="services">
+    <section id="services">
       <div class="wrap">
         <h2>Services</h2>
         <p class="intro">Everything from your yearly checkup to managing a long-term eye condition.</p>
         <div class="services">
-          <div class="service"><h3>Comprehensive eye exams</h3><p>A full check of your vision and eye health. Yearly exams can catch diabetes-related changes, vascular problems, and other issues early.</p></div>
-          <div class="service"><h3>Contact lens fittings</h3><p>Exams and fittings for glasses and contacts to correct nearsightedness, farsightedness, astigmatism, and presbyopia.</p></div>
-          <div class="service"><h3>Optical shop</h3><p>More than 500 frames picked for style, quality, and value, each with a two-year warranty against breakage.</p></div>
-          <div class="service"><h3>Retinal imaging without dilation</h3><p>Wide-field Clarus 500 imaging gives a detailed view of the back of your eye, usually without dilating drops.</p></div>
-          <div class="service"><h3>Eye disease care</h3><p>Diagnosis and management of cataracts, macular degeneration, diabetic retinopathy, amblyopia, and more.</p></div>
-          <div class="service"><h3>Insurance help</h3><p>Our team explains your benefits and helps you get the most out of your vision and medical coverage.</p></div>
+          <div class="service"><h3>Comprehensive eye exams</h3><p>A full check of your vision and eye health. A yearly exam is the best way to protect your vision, and it can catch diabetes-related changes, vascular problems, and other issues early.</p></div>
+          <div class="service"><h3>Exam and contact fitting</h3><p>Exams and fittings for glasses and contacts to correct nearsightedness, farsightedness, astigmatism, and presbyopia.</p></div>
+          <div class="service"><h3>Optical shop</h3><p>More than 500 frames hand-selected for style, quality, and value, each with a two-year warranty against breakage or damage. Our opticians give honest opinions and help you choose lenses that fit your lifestyle.</p></div>
+          <div class="service"><h3>Retinal imaging without dilation</h3><p>The Clarus 500 captures a 133-degree view of the back of your eye in a single picture, usually with no dilating drops. We keep the images on file for future reference.</p></div>
+          <div class="service"><h3>Eye disease care</h3><p>Diagnosis and management of cataracts, macular degeneration, diabetic retinopathy, amblyopia, and more, with treatment that may include nutrition, prescription medicines, vision therapy, or medical procedures.</p></div>
+          <div class="service"><h3>Insurance help</h3><p>You don't have to &ldquo;speak insurance.&rdquo; Our whole team is fluent, explains your benefits, and helps you get everything you are entitled to.</p></div>
         </div>
       </div>
     </section>
 
     <!-- EDIT: insurance plans -->
-    <section id="insurance">
+    <section class="alt" id="insurance">
       <div class="wrap">
         <h2>Insurance we accept</h2>
-        <p class="intro">Don't see your plan? Call us and we'll check your coverage before your visit.</p>
+        <p class="intro">Don't see your plan? We may know your insurance by another name. Call us at <a href="tel:+14045890822">(404) 589-0822</a> and we'll check your coverage before your visit!</p>
         <div class="plans">
           <div>
-            <h3>Vision plans</h3>
+            <h3>Vision plans (annual eye exams, glasses, and contacts)</h3>
             <ul class="insurance">
-              <li>Aetna</li><li>Aetna Student Health</li><li>Cigna</li><li>EyeMed</li><li>MetLife Vision</li><li>VSP</li>
+              <li>Aetna</li><li>Aetna Student Health</li><li>Cigna McKinsey</li><li>EyeMed</li><li>MetLife Vision</li><li>Vision Service Plan (VSP)</li>
             </ul>
           </div>
           <div>
@@ -218,54 +353,116 @@
       </div>
     </section>
 
-    <!-- EDIT: staff. Placeholder photos for now. To add a real photo, upload it (e.g. mario.jpg) next to this file and change that person's src="..." to src="mario.jpg" -->
-    <section class="alt" id="team">
+    <!-- EDIT: staff. Photos are in the images folder (staff-mario.jpg, etc.). To change one, replace the file and keep the same name. -->
+    <section id="team">
       <div class="wrap">
         <h2>Meet our team</h2>
-        <p class="intro">The people you'll see when you visit.</p>
         <div class="team">
-          <div class="person">
-            <img alt="Photo of Dr. Mario Martinez, O.D." src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23CFE2F1'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%237FA9CC'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%237FA9CC'/%3E%3C/svg%3E">
-            <h3>Dr. Mario Martinez, O.D.</h3>
-            <p class="role">Optometrist and owner</p>
-            <p>Grew up in a military family in Texas and played tennis at East Carolina University. A 2021 graduate of Southern College of Optometry with experience in contact lenses, surgical co-management, and eye disease.</p>
+          <article class="person">
+            <img src="images/staff-mario.jpg" alt="Dr. Mario Martinez, O.D." width="800" height="533" loading="lazy">
+            <div>
+              <h3>Dr. Mario Martinez, O.D.</h3>
+              <p class="role">Optometrist/Owner</p><p class="email"><a href="mailto:mario@infocuseyes.com">mario@infocuseyes.com</a></p>
+              <p>Dr. Mario Martinez was born in Texas into a military family. He moved around the country often until being recruited to play tennis at East Carolina University where he graduated with a degree in Public Health and a minor in Biology. He then went on to graduate in 2021 from Southern College of Optometry in Memphis before moving to Atlanta.</p><p>Dr. Martinez completed his rotations at the Daytona Beach VA in Florida and Hall Eyecare Associates in Arkansas. He has experience in fitting contact lenses, pre and post-op management, and managing ocular disease. He takes pride in providing the best quality care while creating a warm atmosphere in clinical settings.</p><p>In his spare time, he can be found playing tennis, pickleball, hiking, racing, or finding new places to eat or recipes to cook.</p>
+            </div>
+          </article>
+          <article class="person">
+            <img src="images/staff-lindsey.jpg" alt="Dr. Lindsey Eisenberg, O.D." width="800" height="534" loading="lazy">
+            <div>
+              <h3>Dr. Lindsey Eisenberg, O.D.</h3>
+              <p class="role">Optometrist</p><p class="email"><a href="mailto:lindsey@infocuseyes.com">lindsey@infocuseyes.com</a></p>
+              <p>Dr. Lindsey Eisenberg is a native Atlantan and grew up in Dunwoody, Georgia. For her undergrad studies she attended the University of Georgia Franklin College of Arts and Science and graduated with Bachelors of Science in Psychology and Biology. After living in New York she earned her Doctorate of Optometry from Pennsylvania College of Optometry at Salus University. While there Dr. Eisenberg studied disease and low vision, but found her passion in contact lens and graduated with a certificate in Advanced Studies of Contact Lenses.</p><p>Dr. Eisenberg loves traveling for the same reason she enjoys practicing optometry, meeting new people and hearing great stories. Her more local hobbies now include pottery and paint by numbers and after an &ldquo;incident&rdquo; she no longer attempts to play kickball. She&rsquo;s very excited to be a part of the In Focus Eye Center Team.</p>
+            </div>
+          </article>
+          <article class="person">
+            <img src="images/staff-steve.jpg" alt="Steven Kintop" width="800" height="534" loading="lazy">
+            <div>
+              <h3>Steven Kintop</h3>
+              <p class="role">Office Manager / ABO Certified Optician</p><p class="email"><a href="mailto:steve@infocuseyes.com">steve@infocuseyes.com</a></p>
+              <p>For any and all questions about lenses, however elementary or esoteric, Steve is your go-to guy. He can and will explain the physics of optics in terms so clear and simple you&rsquo;ll wish he&rsquo;d been your high school science teacher. He&rsquo;s spent plenty of time deep in the trenches of optical labs, and he&rsquo;s been ABO-certified since 2010, so you can trust his expertise when it comes to designing lenses to suit your unique needs and style.</p><p>Steve co-founded In Focus when it first got off the ground in 2009, and he has been indispensable in every part of its operation ever since. Even as the practice has expanded and our staff has grown, Steve has been an evergreen presence at the office and in the neighborhood, and our patients are delighted to see him every time they stop in.</p><p>In a perfect world Steve would have a dozen dogs, but at the moment his rescue mix Cooper is the lucky sole recipient of all of his training and attention. You can find him in costume at DragonCon or the Renaissance Festival with his wife and bonus daughter, or cheering on the Green Bay Packers every day of his life as their number-one fan.</p>
+            </div>
+          </article>
+          <article class="person">
+            <img src="images/staff-emily.jpg" alt="Emily Herman" width="800" height="534" loading="lazy">
+            <div>
+              <h3>Emily Herman</h3>
+              <p class="role">Optometric Technician</p><p class="email"><a href="mailto:emily@infocuseyes.com">emily@infocuseyes.com</a></p>
+              <p>Emily is a dynamic Optometric Technician at In Focus Eye Center, where her extensive experience over the past three years has made her an integral part of the team. Known for her professionalism and efficiency, Emily ensures that the practice runs smoothly, often greeting patients with a cheerful, &ldquo;Don&rsquo;t even sit, I am ready for you!&rdquo; Her role involves a variety of procedures, setting the stage for a seamless patient experience.</p><p>A graduate of Georgia Southern, Emily is passionate about art, music, and animals. With her eclectic taste in music, she designed the playlist you hear at In Focus, spanning multiple genres and eras, creating a vibrant atmosphere in the office. Outside of work, she is a devoted dog lover with two dachshunds and a lab, and she enjoys exploring the outdoors with her furry companions. Destin, FL is her favorite travel destination, where she finds joy in the sun, beach, and sand.</p>
+            </div>
+          </article>
+          <article class="person">
+            <img src="images/staff-mikayla.jpg" alt="Mikayla Mayfield" width="800" height="534" loading="lazy">
+            <div>
+              <h3>Mikayla Mayfield</h3>
+              <p class="role">Optician</p><p class="email"><a href="mailto:mikayla@infocuseyes.com">mikayla@infocuseyes.com</a></p>
+              <p>When asked to describe Mikayla, her co-workers responded with high praise, using words like genuine, sweet, smart and considerate. Working with Mikayla, you will immediately get a sense of calm, and yet her sense of humor and quick wit will keep you on your toes while she makes sure your eyeglasses fit your personal sense of style.</p><p>Mikayla was born in the beautiful beach town of Navarre Florida where she developed her love of nature and walking on the beach. Throughout highschool she was blessed with teachers and coaches that left an indelible mark on who she is today. She competed in 7 different track events. And if that wasn&rsquo;t enough, she competed in the deadlift and bench press for her state championship weightlifting teams her junior and senior years.</p><p>Mikayla has finished the first two years of her bachelor&rsquo;s degree in psychology which plans on returning to in the future. When she has completed her degree she is looking forward to becoming a therapist specializing in childhood development.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDIT: reviews. Full text of the patient reviews shown on the Reviews page (from Yelp and Google) -->
+    <section class="alt" id="reviews">
+      <div class="wrap">
+        <h2>What patients say</h2>
+        <p class="intro">Our patients have rated us the #1 eye doctor in Atlanta on Yelp. Here are some of the things they have said about their experiences with us.</p>
+        <div class="reviews">
+          <figure class="review">
+            <blockquote>
+              <p class="lead">&ldquo;Great experience start to finish.</p>
+              <p>The doctor was friendly and answered all my questions. The tech was super helpful as well, absolutely nailed the glasses I was looking for. I'm glad to find an eye care office I won't dread visiting. Thank you!&rdquo;</p>
+            </blockquote>
+            <figcaption>Scarlett F. <span>on Yelp</span></figcaption>
+          </figure>
+          <figure class="review">
+            <blockquote>
+              <p class="lead">&ldquo;This is the most comprehensive educational eye exam I have ever received.</p>
+              <p>The office was easy to find, impeccably clean, and the staff was incredibly friendly and polite. I have never had my vision health explained to me so precisely as to what is happening and what I need to do to get to where I need to be. The eye doctor also gave me a pair of contacts to try out and then set me up with a follow up appointment in a week to see how they are working out. This not only saves me money but I feel as though I've found a vision office that actually cares about me and my eye health.&rdquo;</p>
+            </blockquote>
+            <figcaption>Marcella A. <span>on Yelp</span></figcaption>
+          </figure>
+          <figure class="review">
+            <blockquote>
+              <p class="lead">&ldquo;I have had the most incredible eye doc experience at In Focus.</p>
+              <p>I came in post partum and my eyes had changed for the first time in a decade. Everyone was so friendly and helpful, even after more than my share of appointments. I would drive from anywhere to go back for such wonderful customer service. HIGHLY recommend.&rdquo;</p>
+            </blockquote>
+            <figcaption>Sarah B. <span>on Google</span></figcaption>
+          </figure>
+          <figure class="review">
+            <blockquote>
+              <p class="lead">&ldquo;They were so amazing!</p>
+              <p>The front staff was so much fun, nice, and full of life. Stephen helped me pick out my glasses, which I loved their selection. The optometrist was sweet and explained everything concisely and simply. They finished filling my prescription in 45 minutes and gave me a free coffee card to go across to iman perk while I waited. When they heard my husband was coming to pick me up, they gave me a 2nd coffee card for him. I will definitely be returning here and recommend this place to any and everyone!&rdquo;</p>
+            </blockquote>
+            <figcaption>Kristin L. <span>on Google</span></figcaption>
+          </figure>
+        </div>
+        <p class="more-reviews">Read more reviews on <a href="https://www.yelp.com/biz/in-focus-eye-center-atlanta">Yelp</a> and <a href="https://www.google.com/search?q=In+Focus+Eye+Center+Atlanta">Google</a>.</p>
+      </div>
+    </section>
+
+    <!-- EDIT: patient forms. The two PDFs are in the "forms" folder next to this file. To update one, replace the PDF and keep the same file name. -->
+    <section id="forms">
+      <div class="wrap">
+        <h2>Patient intake forms</h2>
+        <p class="intro">Save time at check-in by filling out your paperwork before your visit.</p>
+        <div class="forms">
+          <div class="form-card">
+            <h3>New patients</h3>
+            <p>If you are a new patient and would like to fill out paperwork before your visit, download the forms here.</p>
+            <a class="btn solid" href="forms/new-patient-forms.pdf" download="In-Focus-New-Patient-Forms.pdf">Download new patient forms <small>(PDF)</small></a>
           </div>
-          <div class="person">
-            <img alt="Photo of Dr. Lindsey Eisenberg, O.D." src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23DCEBDF'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%2390B79A'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%2390B79A'/%3E%3C/svg%3E">
-            <h3>Dr. Lindsey Eisenberg, O.D.</h3>
-            <p class="role">Optometrist</p>
-            <p>Atlanta native from Dunwoody and UGA graduate. Earned her O.D. from Pennsylvania College of Optometry at Salus University, with advanced training in contact lenses.</p>
-          </div>
-          <div class="person">
-            <img alt="Photo of Steven Kintop" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23F6E7C1'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%23D9B65E'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%23D9B65E'/%3E%3C/svg%3E">
-            <h3>Steven Kintop</h3>
-            <p class="role">Office manager and ABO-certified optician</p>
-            <p>Co-founded In Focus in 2009 and has been ABO certified since 2010. The office expert on lenses and lens design.</p>
-          </div>
-          <div class="person">
-            <img alt="Photo of Emily Herman" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23E6DDF0'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%23A592C2'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%23A592C2'/%3E%3C/svg%3E">
-            <h3>Emily Herman</h3>
-            <p class="role">Optometric technician</p>
-            <p>A Georgia Southern graduate who helps with patient testing and procedures. Also in charge of the office playlist.</p>
-          </div>
-          <div class="person">
-            <img alt="Photo of Marcia" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23F3DCD6'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%23CF8E7E'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%23CF8E7E'/%3E%3C/svg%3E">
-            <h3>Marcia</h3>
-            <p class="role">Optician</p>
-            <p>Helps patients pick frames and makes sense of lens options and insurance benefits.</p>
-          </div>
-          <div class="person">
-            <img alt="Photo of Mikayla Mayfield" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125'%3E%3Crect width='100' height='125' fill='%23D8EEF0'/%3E%3Ccircle cx='50' cy='50' r='21' fill='%237DBFC6'/%3E%3Cpath d='M12 125c0-34 17-48 38-48s38 14 38 48z' fill='%237DBFC6'/%3E%3C/svg%3E">
-            <h3>Mikayla Mayfield</h3>
-            <p class="role">Optician</p>
-            <p>Helps patients find glasses that fit their style while studying psychology.</p>
+          <div class="form-card">
+            <h3>Returning patients</h3>
+            <p>Been here before? Returning patients should download this form.</p>
+            <a class="btn solid" href="forms/returning-patient-form.pdf" download="In-Focus-Returning-Patient-Form.pdf">Download returning patient form <small>(PDF)</small></a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- EDIT: hours and address -->
-    <section id="visit">
+    <section class="alt" id="visit">
       <div class="wrap">
         <h2>Hours and location</h2>
         <div class="visit">
@@ -281,12 +478,13 @@
             </tbody>
           </table>
           <div class="place">
-            <h3>Find us in Inman Village</h3>
+            <h3>Find us in Inman Village, next to Delbar</h3>
             <address>
               870 Inman Village Parkway NE, Suite 3<br>
               Atlanta, GA 30307
             </address>
-            <p>Phone <a href="tel:+14045890822">(404) 589-0822</a><br>Fax (404) 589-4766</p>
+            <p>Phone <a href="tel:+14045890822">(404) 589-0822</a><br>Fax (404) 589-4766<br>Email <a href="mailto:contact@infocuseyes.com">contact@infocuseyes.com</a></p>
+            <p><a href="https://schedulewidget.revintake.com/e345042009d22d5fe933d21d73f39ef0">Book online</a> anytime, even when we're closed.</p>
             <a class="btn outline" href="https://www.google.com/maps/search/?api=1&query=870+Inman+Village+Parkway+NE+Suite+3+Atlanta+GA+30307">Get directions</a>
           </div>
         </div>
@@ -298,23 +496,105 @@
       <div class="book">
         <div>
           <h2>Ready to book your exam?</h2>
-          <p>Pick a time online any hour of the day, or call us during office hours and we'll find a slot that works.</p>
+          <p><span class="badge">New</span>Online scheduling is now open. Pick a time that works for you, day or night, or call us during office hours and we'll find a slot together.</p>
         </div>
         <div class="actions">
-          <a class="btn solid" href="https://www.zocdoc.com/practice/in-focus-eye-center-7246">Book online</a>
+          <a class="btn solid" href="https://schedulewidget.revintake.com/e345042009d22d5fe933d21d73f39ef0">Book online</a>
           <a class="btn outline" href="tel:+14045890822">Call (404) 589-0822</a>
         </div>
       </div>
+
+      <!-- EDIT: HIPAA Notice of Privacy Practices (collapsed until clicked) -->
+      <details class="privacy" id="privacy">
+        <summary>HIPAA Notice of Privacy Practices</summary>
+        <div class="body">
+          <p>Generally speaking, we only use your health information within or outside of our office for things such as payment, treatment, or healthcare operations. For any other use we require your written authorization. There are limited situations where the law allows or requires us to disclose your health information without written consent, but if there is any doubt, our default action is to get your approval first.</p>
+
+          <h3>Treatment</h3>
+          <ul>
+            <li>Setting up appointments</li>
+            <li>Testing your eyes and keeping meticulous records</li>
+            <li>Writing prescriptions for glasses, contacts or medications</li>
+            <li>Helping you select glasses or contacts</li>
+            <li>Referring you to other doctors or clinics</li>
+            <li>Providing prescriptions or refill authorizations for medications to pharmacists</li>
+            <li>Contacting you to let you know your glasses or contact lenses are ready</li>
+            <li>Requesting records from professionals you have seen in the past</li>
+          </ul>
+
+          <h3>Financial purposes</h3>
+          <ul>
+            <li>Inquiring about health or vision care plans, or other sources of payment</li>
+            <li>Processing payments, preparing bills or trying to collect unpaid bills</li>
+            <li>Handling bills or claims that are mailed, faxed, or sent electronically</li>
+          </ul>
+
+          <h3>Business purposes</h3>
+          <p>This represents the things we do to keep our office running, whether for internal quality assurance, personnel decisions, business plans, or sale of interest in the practice in which protected health information is transferred. Your health information is protected from sale for the purposes of marketing or fundraising automatically, unless you authorize its use in writing. Where required by Georgia law, we will ask for special written permission from you to release your personal information.</p>
+
+          <h3>Without authorization</h3>
+          <p>There are limited situations where we are allowed or required to disclose your information without your permission. Some of these situations may not apply to your specific circumstances in our office:</p>
+          <ul>
+            <li>Health information reports mandated by state or federal law</li>
+            <li>Public health: contagious disease reporting, investigation, or surveillance; notices to and from the FDA about drugs or other medical items</li>
+            <li>Reporting suspected abuse, neglect, or domestic violence to authorities</li>
+            <li>Disclosures for health oversight activities (licensing of doctors, audits by Medicare, investigation of possible healthcare law violations)</li>
+            <li>Disclosures for law enforcement purposes</li>
+            <li>Disclosures for assistance in identifying individuals</li>
+            <li>Disclosures for health related research</li>
+            <li>Uses and disclosures to prevent threat to health and safety</li>
+            <li>Uses and disclosures for specialized government functions</li>
+            <li>Disclosures relating to worker's compensation</li>
+            <li>Disclosures to business associates who work with us and agree to keep your health information private</li>
+          </ul>
+
+          <h3>Other disclosures</h3>
+          <p>Any other uses or disclosures of your health information will not be made unless you have signed an authorization form. You do not have to sign this form. If you do sign one, you may revoke the permission at any time unless we have already acted on its permission.</p>
+
+          <h3>Your rights regarding your health information</h3>
+          <ul>
+            <li>You can ask us to communicate with you in a confidential way. We will try to accommodate this request if it is reasonable, and if any extra cost is paid for.</li>
+            <li>You have the right to restrict the release of health information to insurance companies or benefit plans when services are paid in full out-of-pocket. If we don't use your plan for payment of care, we will protect your information from them unless you authorize its release in writing.</li>
+            <li>You may request electronic or paper copies of your health information. By law, there are a few situations (limited) where we can refuse to permit access or copying. You may have to pay for photocopies in advance. If your request is denied, a written explanation will be provided.</li>
+            <li>You can ask to amend your health information if you have reason to believe it is incorrect or incomplete.</li>
+            <li>You can ask for a list of disclosures we have made of your health information.</li>
+            <li>You can get one such list per year without charge, otherwise they must be paid for in advance.</li>
+            <li>You have the right to be notified in the event of a breach of the security of your personal health information. If you have any questions as to the ways in which we operate to protect your information, please ask. Every aspect of how we operate is designed with your information security as paramount.</li>
+          </ul>
+
+          <h3>Notice of Privacy Practices</h3>
+          <p>We must abide by the terms of this Notice of Privacy Practices by law until we change it. We reserve the right to change this notice at any time in compliance with and as allowed by law. If we change this notice, it will apply to your health information already in our records, and future information generated in the future. If we change this Notice, copies will be available in our office and we will do our best to keep you informed.</p>
+
+          <h3>Complaints</h3>
+          <!-- EDIT: the old site named the previous owner here. Add the name of the current privacy contact if you want one listed. -->
+          <p>We want you to know that we view the privacy of your health information as seriously as you do. However, if you feel that our efforts have not maintained your privacy to your satisfaction, please contact our office right away at <a href="tel:+14045890822">(404) 589-0822</a> or <a href="mailto:contact@infocuseyes.com">contact@infocuseyes.com</a>. If there is something we can do better, we would like the opportunity to start addressing that change as soon as possible.</p>
+        </div>
+      </details>
     </div>
   </main>
 
   <footer>
     <div class="wrap">
-      <span>&copy; <span id="year">2026</span> In Focus Eye Center</span>
-      <span class="social"><a href="https://www.facebook.com/InFocusEyeCenter/">Facebook</a><a href="http://www.yelp.com/biz/in-focus-eye-center-atlanta">Yelp</a><a href="#">Back to top</a></span>
+      <span class="foot-brand">
+        <img src="images/logo.png" alt="In Focus Eye Center" width="640" height="424" loading="lazy">
+        <span>&copy; <span id="year">2026</span> In Focus Eye Center &middot; Serving Inman Park since 2009</span>
+      </span>
+      <span class="social"><a href="#privacy" id="privacy-link">Privacy practices</a><a href="https://www.facebook.com/InFocusEyeCenter/">Facebook</a><a href="https://www.yelp.com/biz/in-focus-eye-center-atlanta">Yelp</a><a href="#">Back to top</a></span>
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Open the privacy notice when someone follows a link to it
+    function openPrivacy() { if (location.hash === '#privacy') document.getElementById('privacy').open = true; }
+    window.addEventListener('hashchange', openPrivacy);
+    openPrivacy();
+    // Close the holiday hours dropdown when clicking elsewhere or pressing Escape
+    var holiday = document.getElementById('holiday');
+    if (holiday) {
+      document.addEventListener('click', function (e) { if (!holiday.contains(e.target)) holiday.open = false; });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') holiday.open = false; });
+    }
+  </script>
 </body>
 </html>
