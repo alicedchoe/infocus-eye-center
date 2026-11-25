@@ -26,10 +26,11 @@
       --font: "Inter", "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif; /* Inter is loaded for the digits 0-9 only */
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
     body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 1.0625rem; line-height: 1.6; }
     img { max-width: 100%; display: block; }
     a { color: var(--blue-ink); }
+    a[href^="tel:"] { white-space: nowrap; } /* keep phone numbers on one line */
     a:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     h1, h2, h3 { color: var(--navy); line-height: 1.15; margin: 0; }
     p { margin: 0 0 1em; }
@@ -37,7 +38,7 @@
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
     /* Top bar */
-    .topbar { background: var(--navy); color: #FFFFFF; font-size: 1.03rem; position: relative; z-index: 20; }
+    .topbar { background: var(--navy); color: #FFFFFF; font-size: 1.03rem; position: sticky; top: 0; z-index: 30; box-shadow: 0 6px 18px -10px rgba(0, 45, 86, 0.55); }
     .topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 14px 20px; flex-wrap: wrap; padding-top: 16px; padding-bottom: 16px; position: relative; }
     .topbar .contact { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 0; }
     .topbar .item { display: inline-flex; align-items: center; gap: 9px; color: #FFFFFF; font-weight: 600; text-decoration: none; padding: 2px 16px; border-left: 2px solid rgba(0, 158, 255, 0.65); }
@@ -46,6 +47,15 @@
     .topbar .item svg { width: 20px; height: 20px; flex: none; color: var(--blue); }
     .topbar .book-btn { background: var(--blue); color: var(--navy); font-weight: 800; font-size: 1.06rem; padding: 14px 26px; border-radius: 999px; text-decoration: none; white-space: nowrap; box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.6); }
     .topbar .book-btn:hover { background: #4DBBFF; }
+
+    /* Compact floating bar: on tablets and phones the full bar scrolls away and this slim one slides in */
+    .quickbar { display: none; position: fixed; left: 0; right: 0; top: 0; transform: translateY(-110%); visibility: hidden; transition: transform 0.2s ease, visibility 0s linear 0.2s; }
+    .quickbar.show { transform: none; visibility: visible; transition: transform 0.2s ease; }
+    .quickbar .wrap { flex-wrap: nowrap; justify-content: space-between; padding-top: 10px; padding-bottom: 10px; }
+    .quickbar .contact { flex-wrap: nowrap; }
+    .quickbar .book-btn { padding: 11px 22px; font-size: 1rem; }
+    .quickbar .lbl-short { display: none; }
+    @media (prefers-reduced-motion: reduce) { .quickbar, .quickbar.show { transition: none; } }
 
     /* Holiday hours dropdown */
     .holiday { position: relative; }
@@ -178,7 +188,10 @@
     footer .foot-brand img { width: 150px; height: auto; }
 
     @media (max-width: 1150px) {
+      .topbar { position: relative; box-shadow: none; }
+      .quickbar { display: block; position: fixed; box-shadow: 0 6px 18px -10px rgba(0, 45, 86, 0.55); }
       .topbar .wrap { justify-content: flex-start; }
+      .quickbar .wrap { justify-content: space-between; }
       .holiday .panel { left: auto; right: 0; }
     }
     @media (max-width: 900px) {
@@ -199,6 +212,10 @@
       section { padding-top: 60px; padding-bottom: 60px; }
       #book { padding-top: 60px; }
     }
+    @media (max-width: 400px) {
+      .quickbar .lbl-long { display: none; }
+      .quickbar .lbl-short { display: inline; }
+    }
     @media (max-width: 560px) {
       .wrap { padding-left: 16px; padding-right: 16px; }
       .services { grid-template-columns: 1fr; }
@@ -215,6 +232,9 @@
       .holiday { width: 100%; }
       .holiday .panel { max-width: none; }
       .topbar .book-btn { width: 100%; text-align: center; }
+      .quickbar .contact { flex-direction: row; width: auto; }
+      .quickbar .qb-holiday { display: none; }
+      .quickbar .book-btn { width: auto; padding: 10px 18px; }
       .newsched { font-size: 1rem; }
     }
   </style>
@@ -254,6 +274,23 @@
         </details>
       </div>
       <a class="book-btn" href="https://schedulewidget.revintake.com/e345042009d22d5fe933d21d73f39ef0">Book an appointment</a>
+    </div>
+  </div>
+
+  <!-- Slim floating bar shown on tablets and phones after scrolling. EDIT: phone number -->
+  <div class="topbar quickbar" id="quickbar">
+    <div class="wrap">
+      <div class="contact">
+        <a class="item" href="tel:+14045890822">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+          (404) 589-0822
+        </a>
+        <a class="item qb-holiday" href="#holiday" id="quick-holiday">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1zm12 8H5v9h14z"/></svg>
+          Holiday hours
+        </a>
+      </div>
+      <a class="book-btn" href="https://schedulewidget.revintake.com/e345042009d22d5fe933d21d73f39ef0"><span class="lbl-long">Book an appointment</span><span class="lbl-short">Book online</span></a>
     </div>
   </div>
 
@@ -359,17 +396,17 @@
         <h2>Meet our team</h2>
         <div class="team">
           <article class="person">
-            <img src="images/staff-mario.jpg" alt="Dr. Mario Martinez, O.D." width="800" height="533" loading="lazy">
+            <img src="images/staff-mario.jpg" alt="Mario Martinez, O.D." width="800" height="533" loading="lazy">
             <div>
-              <h3>Dr. Mario Martinez, O.D.</h3>
+              <h3>Mario Martinez, O.D.</h3>
               <p class="role">Optometrist/Owner</p><p class="email"><a href="mailto:mario@infocuseyes.com">mario@infocuseyes.com</a></p>
               <p>Dr. Mario Martinez was born in Texas into a military family. He moved around the country often until being recruited to play tennis at East Carolina University where he graduated with a degree in Public Health and a minor in Biology. He then went on to graduate in 2021 from Southern College of Optometry in Memphis before moving to Atlanta.</p><p>Dr. Martinez completed his rotations at the Daytona Beach VA in Florida and Hall Eyecare Associates in Arkansas. He has experience in fitting contact lenses, pre and post-op management, and managing ocular disease. He takes pride in providing the best quality care while creating a warm atmosphere in clinical settings.</p><p>In his spare time, he can be found playing tennis, pickleball, hiking, racing, or finding new places to eat or recipes to cook.</p>
             </div>
           </article>
           <article class="person">
-            <img src="images/staff-lindsey.jpg" alt="Dr. Lindsey Eisenberg, O.D." width="800" height="534" loading="lazy">
+            <img src="images/staff-lindsey.jpg" alt="Lindsey Eisenberg, O.D." width="800" height="534" loading="lazy">
             <div>
-              <h3>Dr. Lindsey Eisenberg, O.D.</h3>
+              <h3>Lindsey Eisenberg, O.D.</h3>
               <p class="role">Optometrist</p><p class="email"><a href="mailto:lindsey@infocuseyes.com">lindsey@infocuseyes.com</a></p>
               <p>Dr. Lindsey Eisenberg is a native Atlantan and grew up in Dunwoody, Georgia. For her undergrad studies she attended the University of Georgia Franklin College of Arts and Science and graduated with Bachelors of Science in Psychology and Biology. After living in New York she earned her Doctorate of Optometry from Pennsylvania College of Optometry at Salus University. While there Dr. Eisenberg studied disease and low vision, but found her passion in contact lens and graduated with a certificate in Advanced Studies of Contact Lenses.</p><p>Dr. Eisenberg loves traveling for the same reason she enjoys practicing optometry, meeting new people and hearing great stories. Her more local hobbies now include pottery and paint by numbers and after an &ldquo;incident&rdquo; she no longer attempts to play kickball. She&rsquo;s very excited to be a part of the In Focus Eye Center Team.</p>
             </div>
@@ -590,7 +627,23 @@
     window.addEventListener('hashchange', openPrivacy);
     openPrivacy();
     // Close the holiday hours dropdown when clicking elsewhere or pressing Escape
+    // Floating bar: on narrower screens, show the slim bar once the full bar has scrolled out of view
+    var fullBar = document.querySelector('.topbar'), quick = document.getElementById('quickbar');
+    function syncQuick() {
+      var past = fullBar.getBoundingClientRect().bottom < 0;
+      quick.classList.toggle('show', past);
+      quick.inert = !past;
+    }
+    window.addEventListener('scroll', syncQuick, { passive: true });
+    window.addEventListener('resize', syncQuick);
+    syncQuick();
     var holiday = document.getElementById('holiday');
+    // "Holiday hours" in the slim bar jumps back to the top and opens the dropdown
+    document.getElementById('quick-holiday').addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation();
+      window.scrollTo(0, 0);
+      if (holiday) holiday.open = true;
+    });
     if (holiday) {
       document.addEventListener('click', function (e) { if (!holiday.contains(e.target)) holiday.open = false; });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') holiday.open = false; });
